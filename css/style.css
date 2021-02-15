@@ -1,0 +1,7 @@
+@import url('./base.css') ;
+
+@import url('./layouts.css') ;
+@import url('./modulus.css') ;
+.photo-template{
+    visibility: hidden;
+}
