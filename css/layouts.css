@@ -1,11 +1,11 @@
 
-div{
+.card{
     height: 400px;
     width:300px;
     margin: 10px;
 }
 
-div img{
+.card img{
     height: 200px;
     width: 90%;
     margin: 5%;
