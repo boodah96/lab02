@@ -87,7 +87,7 @@ function addOption(newImage){
                 optionClone.text(newImage.keyword);
                 optionClone.attr('value', `${newImage.keyword}`)
                 optionClone.attr('class','newOption')
-                $('select').append(optionClone);
+                $('.selectCard').append(optionClone);
 };
 
 }
