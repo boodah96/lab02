@@ -10,17 +10,23 @@ function Image(val) {
 
 
 }
+var page;
 
 //get data from JSON
-let page='./page-1.json';
-$('.page1').click(()=>{
-    page='./page-1.json';
+$('.page1').on('click',()=>{
+    $('.render').empty();
+    $('.newOption').remove();
+    card('./page-1.json')
 
 })
-$('.page1').click(()=>{
-    page='./page-1.json';
+$('.page2').click(()=>{
+    $('.render').empty();
+    $('.newOption').remove();
+    card('./page-2.json')
+
 
 })
+function card (page){
 $.ajax(`${page}`)
     .then(data => {
         data.forEach(element => {
@@ -45,37 +51,25 @@ $.ajax(`${page}`)
         return newcard;
     }
 // creat render function
-// Image.prototype.render = function () {
-//     let divClone = $('.photo-template').clone();
-//     divClone.removeClass('photo-template');
-//     divClone.find('h2').text(this.title);
-//     divClone.find('p').text(this.description);
-//     divClone.find('img').attr('src', `${this.image_url}`);
-//     $('.render').append(divClone);
 
-// };
 Image.prototype.render = function () {
     let divClone = this.toHtml();
     $('.render').append(divClone);
 
 };
-Image.prototype.renderNew = function () {
-    let divClone = this.toHtml();
-    $('.result').append(divClone);
 
-};
 
 // response to select
 $('select').on('change', function () {
-    $('.render').hide();
-    $('.result').html("");
+    $('.render').empty();
+
 
 let choosenImage=($(this).val());
 $.ajax(`${page}`)
 .then(data => {
         data.forEach(element=>{if(element.keyword===choosenImage){
             let newImage = new Image(element);
-            newImage.renderNew();
+            newImage.render();
         }} )
     
     })
@@ -92,6 +86,19 @@ function addOption(newImage){
                 optionClone.removeClass('option');
                 optionClone.text(newImage.keyword);
                 optionClone.attr('value', `${newImage.keyword}`)
+                optionClone.attr('class','newOption')
                 $('select').append(optionClone);
 };
 
+}
+
+
+// Image.prototype.render = function () {
+//     let divClone = $('.photo-template').clone();
+//     divClone.removeClass('photo-template');
+//     divClone.find('h2').text(this.title);
+//     divClone.find('p').text(this.description);
+//     divClone.find('img').attr('src', `${this.image_url}`);
+//     $('.render').append(divClone);
+
+// };
