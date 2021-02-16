@@ -12,45 +12,55 @@ function Image(val) {
 }
 
 //get data from JSON
+let page='./page-1.json';
+$('.page1').click(()=>{
+    page='./page-1.json';
 
-$.ajax('./page-1.json')
+})
+$('.page1').click(()=>{
+    page='./page-1.json';
+
+})
+$.ajax(`${page}`)
     .then(data => {
         data.forEach(element => {
             let newImage = new Image(element);
-            console.log(newImage);
             newImage.render();
             if (!(keywordArr.includes(newImage.keyword))) {
                 keywordArr.push(newImage.keyword);
-                console.log(keywordArr);
-                let optionClone = $('.option').clone();
-                optionClone.removeClass('option');
-                optionClone.text(newImage.keyword);
-                optionClone.attr('value', `${newImage.keyword}`)
-                $('select').append(optionClone);
+                addOption(newImage);
             }
 
 
 
         });
+        ;
     }
 
     )
+    // to html function
+    Image.prototype.toHtml=function(){
+        let template=$('#template-neigh').html();
+        let newcard=Mustache.render(template,this);
+        return newcard;
+    }
 // creat render function
+// Image.prototype.render = function () {
+//     let divClone = $('.photo-template').clone();
+//     divClone.removeClass('photo-template');
+//     divClone.find('h2').text(this.title);
+//     divClone.find('p').text(this.description);
+//     divClone.find('img').attr('src', `${this.image_url}`);
+//     $('.render').append(divClone);
+
+// };
 Image.prototype.render = function () {
-    let divClone = $('.photo-template').clone();
-    divClone.removeClass('photo-template');
-    divClone.find('h2').text(this.title);
-    divClone.find('p').text(this.description);
-    divClone.find('img').attr('src', `${this.image_url}`);
+    let divClone = this.toHtml();
     $('.render').append(divClone);
 
 };
 Image.prototype.renderNew = function () {
-    let divClone = $('.photo-template').clone();
-    divClone.removeClass('photo-template');
-    divClone.find('h2').text(this.title);
-    divClone.find('p').text(this.description);
-    divClone.find('img').attr('src', `${this.image_url}`);
+    let divClone = this.toHtml();
     $('.result').append(divClone);
 
 };
@@ -61,7 +71,7 @@ $('select').on('change', function () {
     $('.result').html("");
 
 let choosenImage=($(this).val());
-$.ajax('./page-1.json')
+$.ajax(`${page}`)
 .then(data => {
         data.forEach(element=>{if(element.keyword===choosenImage){
             let newImage = new Image(element);
@@ -77,5 +87,11 @@ $.ajax('./page-1.json')
 
 })
 
-
+function addOption(newImage){
+    let optionClone = $('.option').clone();
+                optionClone.removeClass('option');
+                optionClone.text(newImage.keyword);
+                optionClone.attr('value', `${newImage.keyword}`)
+                $('select').append(optionClone);
+};
 
