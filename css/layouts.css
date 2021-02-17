@@ -3,6 +3,10 @@
     height: 400px;
     width:300px;
     margin: 10px;
+    display: inline-grid;
+   
+
+
 }
 
 .card img{
@@ -12,13 +16,25 @@
 
 }
 body{
-    margin: 0 auto;
-    width:960px ;
+    
+
+}
+main{
+margin: 0 5%;
+    display: grid;
+    grid-template-columns: auto auto auto;
     height: 100%;
 
 }
 footer{
+    height: 100px;
+    line-height:100px ;
     position: relative;
     clear: left;
+    text-align: center;
+}
+
+header{
+    height: 100px;
     text-align: center;
 }

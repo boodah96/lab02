@@ -4,7 +4,6 @@
   <head>
     <title>The Gallery of Horns</title>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
     <script id='template-neigh' type='text/x-tmpl-mustache'>
       <div class="card">
@@ -18,8 +17,14 @@
   <body>
     <header>
       <h1 >The Gallery of Horns</h1>
-      <select >
+      <br>
+      <label for="Filter">Filter by Keyword:</label>
+      <select name="Filter" class="selectCard" >
         <option class="option" value="default">Filter by Keyword</option>
+      </select>
+      <label for="SortBy">Sort by:</label>
+      <select name="SortBy" class="sort">
+        <option class="sortOption" value="sortBy">sort by</option>
       </select>
       <button class="page1">page 1</button>
       <button class="page2">page 2</button>
